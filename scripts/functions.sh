@@ -26,7 +26,9 @@ fi
 # Gather Student Information and Create Information File
 
 student_info(){
+
 echo -e "$1 $2 Submission"
+
 while IFS=: read -r c1 c2; do
     [[ $c1 == Name ]] && name=$c1
     [[ $c1 == FName ]] && fname=$c1
@@ -44,20 +46,20 @@ blank_line
 echo -e "Instructor email: $inmailaddy"
 read -n1 -s -r -p $'Press space to continue or CTRL-C to exit' key
 
-if [ "$key" = ' ' ]; then
+#if [ "$key" = ' ' ]; then
     # Space pressed, do something
     # echo [$key] is empty when SPACE is pressed # uncomment to trace
-	filename=$snumber-$1_$2_${fname:0:1}_$lname.txt
-	mkdir ~/.output 2>/tmp/null
-	outfile=~/.output/$filename
+#	filename=$snumber-$1_$2_${fname:0:1}_$lname.txt
+#	mkdir ~/.output 2>/tmp/null
+#	outfile=~/.output/$filename
 
-	echo -e "Work will be saved in $outfile \n"
-	echo $( cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
-	echo -e "$1 $2 - ($snumber) $fname $lname \n" | tee -a $outfile
-else
+#	echo -e "Work will be saved in $outfile \n"
+#	echo $( cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
+#	echo -e "$1 $2 - ($snumber) $fname $lname \n" | tee -a $outfile
+#else
     # Anything else pressed, do whatever else.
     # echo [$key] not empty
-fi
+#fi
 
 return 0
 }
