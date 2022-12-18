@@ -46,13 +46,12 @@ echo -e "   Email address: $mailaddy"
 blank_line
 echo -e "Instructor email: $inmailaddy"
 blank_line
-read -n 1 -r -s -p $'Press enter to continue...\n'
+read -n 1 -r -s -p $'Press enter to continue or CTRL-C to exit\n'
 
 filename=$snumber-$1_$2_${fname:0:1}_$lname.txt
 mkdir ~/.output 2>/tmp/null
 outfile=~/.output/$filename
 
-echo -e "Work will be saved in $outfile \n"
 echo $( cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
 echo -e "$1 $2 - ($snumber) $fname $lname \n" | tee -a $outfile
 
