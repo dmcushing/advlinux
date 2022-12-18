@@ -43,4 +43,4 @@ Student:$snumber
 Instructor:$inmailaddy
 EOF
 
-echo "$( hostname ) is online! Congrats $fname." | mailx -s "Test Email from $( hostname )" -r $inmailaddy $mailaddy,$inmailaddy
+echo "$( hostname ) is online! Congrats $fname." | mailx -s "Test Email from $( hostname )" -r mailrelay@cety.online $mailaddy,$inmailaddy
