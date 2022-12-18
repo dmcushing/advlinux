@@ -36,23 +36,29 @@ while IFS=: read -r c1 c2; do
     [[ $c1 == Instructor ]] && inmailaddy=$c1
 done < ~/.info/.info
 
-echo -n "Enter your first name: "
-read fname
-echo -n "Enter your last name: "
-read lname
-echo -n "Enter your Student number: "
-read snumber
-echo -n "Enter your email address: "
-read mailaddy
-fname=`echo $fname | sed 's/ /_/g'`
-lname=`echo $lname | sed 's/ /_/g'`
-filename=$snumber-$1_$2_${fname:0:1}_$lname.txt
-mkdir ~/.output 2>/tmp/null
-outfile=~/.output/$filename
+echo -e "      First name: $fname"
+echo -e "       Last name: $lname"
+echo -e "  Student number: $snumber"
+echo -e "   Email address: $mailaddy"
+blank_line
+echo -e "Instructor email: $inmailaddy"
+read -n1 -s -r -p $'Press space to continue or CTRL-C to exit' key
 
-echo -e "Work will be saved in $outfile \n"
-echo $( cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
-echo -e "$1 $2 - ($snumber) $fname $lname \n" | tee -a $outfile
+if [ "$key" = ' ' ]; then
+    # Space pressed, do something
+    # echo [$key] is empty when SPACE is pressed # uncomment to trace
+	filename=$snumber-$1_$2_${fname:0:1}_$lname.txt
+	mkdir ~/.output 2>/tmp/null
+	outfile=~/.output/$filename
+
+	echo -e "Work will be saved in $outfile \n"
+	echo $( cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
+	echo -e "$1 $2 - ($snumber) $fname $lname \n" | tee -a $outfile
+else
+    # Anything else pressed, do whatever else.
+    # echo [$key] not empty
+fi
+
 return 0
 }
 
