@@ -28,6 +28,7 @@ fi
 student_info(){
 
 echo -e "$1 $2 Submission"
+blank_line
 
 while IFS=: read -r c1 c2; do
     [[ $c1 == Name ]] && name=$c2
@@ -44,22 +45,16 @@ echo -e "  Student number: $snumber"
 echo -e "   Email address: $mailaddy"
 blank_line
 echo -e "Instructor email: $inmailaddy"
+blank_line
 read -n 1 -r -s -p $'Press enter to continue...\n'
 
-#if [ "$key" = ' ' ]; then
-    # Space pressed, do something
-    # echo [$key] is empty when SPACE is pressed # uncomment to trace
-#	filename=$snumber-$1_$2_${fname:0:1}_$lname.txt
-#	mkdir ~/.output 2>/tmp/null
-#	outfile=~/.output/$filename
+filename=$snumber-$1_$2_${fname:0:1}_$lname.txt
+mkdir ~/.output 2>/tmp/null
+outfile=~/.output/$filename
 
-#	echo -e "Work will be saved in $outfile \n"
-#	echo $( cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
-#	echo -e "$1 $2 - ($snumber) $fname $lname \n" | tee -a $outfile
-#else
-    # Anything else pressed, do whatever else.
-    # echo [$key] not empty
-#fi
+echo -e "Work will be saved in $outfile \n"
+echo $( cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
+echo -e "$1 $2 - ($snumber) $fname $lname \n" | tee -a $outfile
 
 return 0
 }
