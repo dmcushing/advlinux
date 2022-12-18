@@ -29,6 +29,7 @@ else
 	echo 'smtp_tls_security_level = may' >> /etc/postfix/main.cf
 	echo 'header_size_limit = 409600' >> /etc/postfix/main.cf
 	cp /advlinux/sasl_passwd.db /etc/postfix/
+	sed -i -e "s/hostname.cety.online/$( hostname ).cety.online/g" /etc/postfix/main.cf
 	chmod 600 /etc/postfix/sasl_passwd.db
 	touch /done
 fi
