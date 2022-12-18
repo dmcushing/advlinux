@@ -44,7 +44,7 @@ echo -e "  Student number: $snumber"
 echo -e "   Email address: $mailaddy"
 blank_line
 echo -e "Instructor email: $inmailaddy"
-read -n 1 -r -s -p $'Press any key to continue or CTRL-C to exit\n'
+read -n 1 -r -s -p $'Press enter to continue...\n'
 
 #if [ "$key" = ' ' ]; then
     # Space pressed, do something
