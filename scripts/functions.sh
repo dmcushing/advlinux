@@ -53,28 +53,41 @@ mkdir ~/.output 2>/tmp/null
 outfile=~/.output/$filename
 
 echo $( cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
-echo -e "$1 $2 - ($snumber) $fname $lname \n" | tee -a $outfile
+echo -e "$1 $2 - ($snumber) $fname $lname" >> $outfile
 
 return 0
 }
 
 student_info_midterm(){
+
 echo -e "$1 $2 Submission"
-echo -n "Enter your first name: "
-read fname
-echo -n "Enter your last name: "
-read lname
-echo -n "Enter your Student number: "
-read snumber
-fname=`echo $fname | sed 's/ /_/g'`
-lname=`echo $lname | sed 's/ /_/g'`
+blank_line
+
+while IFS=: read -r c1 c2; do
+    [[ $c1 == Name ]] && name=$c2
+    [[ $c1 == FName ]] && fname=$c2
+    [[ $c1 == LName ]] && lname=$c2
+    [[ $c1 == Email ]] && mailaddy=$c2
+    [[ $c1 == Student ]] && snumber=$c2
+    [[ $c1 == Instructor ]] && inmailaddy=$c2
+done < ~/.info/.info
+
+echo -e "      First name: $fname"
+echo -e "       Last name: $lname"
+echo -e "  Student number: $snumber"
+echo -e "   Email address: $mailaddy"
+blank_line
+echo -e "Instructor email: $inmailaddy"
+blank_line
+read -n 1 -r -s -p $'Press enter to continue or CTRL-C to exit\n'
+
 filename=$snumber-$1_$2_${fname:0:1}_$lname.txt
 mkdir ~/.output 2>/tmp/null
 outfile=~/.output/$filename
 
-echo -e "Work will be saved in $outfile \n"
-echo $(cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
-echo -e "$1 $2 - ($snumber) $fname $lname \n" | tee -a $outfile
+echo $( cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
+echo -e "$1 $2 - ($snumber) $fname $lname" >> $outfile
+
 return 0
 }
 
@@ -94,18 +107,19 @@ return 0
 
 mail_out(){
 
-content=`base64 -w0 $outfile`
+content=$( base64 -w0 $outfile )
 attachment="$1_$2-$lname-$fname.txt"
 
 read -p "Mail your work to your instructor? (y to send mail or CTRL-C to exit) "
-[ "${REPLY,,}" != "y" ] || curl --request POST \
-  --url https://api.sendgrid.com/v3/mail/send \
-  --header "Authorization: Bearer $SENDGRID_API_KEY" \
-  --header 'Content-Type: application/json' \
-  --data '{"personalizations": [{"to": [{"email": "dave@davecushing.ca"}],"cc": [{"email":"'"$mailaddy"'"}]}],"from": {"email": "dave@davecushing.ca"},"subject": "'"$lname $fname: $1 $2"'","content": [{"type": "text/plain", "value": "Sent as attachment:"}] , "attachments": [{"content": "'"$content"'", "type": "text/plain", "filename": "'"$attachment"'"}]}'
+# [ "${REPLY,,}" != "y" ] || curl --request POST \
+#  --url https://api.sendgrid.com/v3/mail/send \
+#  --header "Authorization: Bearer $SENDGRID_API_KEY" \
+#  --header 'Content-Type: application/json' \
+#  --data '{"personalizations": [{"to": [{"email": "dave@davecushing.ca"}],"cc": [{"email":"'"$mailaddy"'"}]}],"from": {"email": "dave@davecushing.ca"},"subject": "'"$lname $fname: $1 $2"'","content": [{"type": "text/plain", "value": "Sent as attachment:"}] , "attachments": [{"content": "'"$content"'", "type": "text/plain", "filename": "'"$attachment"'"}]}'
 
 exit 0
 }
+
 mail_out_test(){
 
 content=`base64 -w0 $outfile`
