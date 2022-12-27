@@ -3,6 +3,8 @@
 source /scripts/functions.sh
 
 # Script to Gather Student Work
+# call with sudo -E /scripts/scriptname
+# -E exports the user's environment variables (ie. ~)
 
 clear
 

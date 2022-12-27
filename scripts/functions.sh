@@ -111,14 +111,10 @@ content=$( base64 -w0 $outfile )
 attachment="$1_$2-$lname-$fname.txt"
 
 read -p "Mail your work to your instructor? (y to send mail or CTRL-C to exit) "
-
 echo "$( cat $outfile )" | mailx -s "$lname $fname: $1 $2 " -r mailrelay@cety.online $mailaddy,$inmailaddy
 
-# [ "${REPLY,,}" != "y" ] || curl --request POST \
-#  --url https://api.sendgrid.com/v3/mail/send \
-#  --header "Authorization: Bearer $SENDGRID_API_KEY" \
-#  --header 'Content-Type: application/json' \
-#  --data '{"personalizations": [{"to": [{"email": "dave@davecushing.ca"}],"cc": [{"email":"'"$mailaddy"'"}]}],"from": {"email": "dave@davecushing.ca"},"subject": "'"$lname $fname: $1 $2"'","content": [{"type": "text/plain", "value": "Sent as attachment:"}] , "attachments": [{"content": "'"$content"'", "type": "text/plain", "filename": "'"$attachment"'"}]}'
+# mailx with attachment (for reference)
+# mailx -a file.txt -s "Subject" user@domain.com < /dev/null
 
 exit 0
 }
@@ -129,11 +125,7 @@ content=`base64 -w0 $outfile`
 attachment="$1_$2-$lname-$fname.txt"
 
 read -p "Mail your work to your instructor? (y to send mail or CTRL-C to exit) "
-[ "${REPLY,,}" != "y" ] || curl --request POST \
-  --url https://api.sendgrid.com/v3/mail/send \
-  --header "Authorization: Bearer $SENDGRID_API_KEY" \
-  --header 'Content-Type: application/json' \
-  --data '{"personalizations": [{"to": [{"email": "cet1025@davecushing.ca"}]}],"from": {"email": "dave@davecushing.ca"},"subject": "'"$1 $2: $lname $fname"'","content": [{"type": "text/plain", "value": "Sent as attachment:"}] , "attachments": [{"content": "'"$content"'", "type": "text/plain", "filename": "'"$attachment"'"}]}'
+echo "$( cat $outfile )" | mailx -s "$lname $fname: $1 $2 " -r mailrelay@cety.online $mailaddy,$inmailaddy
 
 exit 0
 }
