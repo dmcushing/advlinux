@@ -15,12 +15,12 @@ is_super_user
 student_info MegaUser Script
 
 echo -e "--- megauser dir" | tee -a $outfile
-tree ~/megauser | tee -a $outfile
-echo -e "--- ~/megauser/megauser.sh" | tee -a $outfile
-cat ~/megauser.sh | tee -a $outfile
+tree ~/megalab | tee -a $outfile
+echo -e "--- ~/megalab/megauser.sh" | tee -a $outfile
+cat ~/megalab/megauser.sh | tee -a $outfile
 blank_line
-echo -e "--- ~/megauser/megauser.txt" | tee -a $outfile
-cat ~/megauser.txt | tee -a $outfile
+echo -e "--- ~/megalab/megauser.txt" | tee -a $outfile
+cat ~/megalab/megauser.txt | tee -a $outfile
 
 # Mail information to instructor and student
 mail_out MegaUser Script
