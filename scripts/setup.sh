@@ -18,7 +18,7 @@ else
 	cp /advlinux/linuxuserkey.txt /home/linuxuser/.ssh/authorized_keys 
 	chmod 600 /home/linuxuser/.ssh/authorized_keys 
 	chown linuxuser:linuxuser /home/linuxuser/.ssh/authorized_keys 
-	echo 'export HISTTIMEFORMAT="%Y-%m-%d %T "' >> ~/.profile
+	echo 'export HISTTIMEFORMAT="%Y-%m-%d %T "' >> /home/linuxuser/.profile
 	debconf-set-selections <<< 'postfix postfix/mailname string hostname.cety.online'
 	debconf-set-selections <<< 'postfix postfix/main_mailer_type string ''Internet Site'''
 	debconf-set-selections <<< 'postfix postfix/relayhost string [mail.cety.online]:2420'
