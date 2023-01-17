@@ -17,6 +17,8 @@ student_info filedate.sh script CET1034
 echo -e "**--- Check Directory and File" | tee -a $outfile
 check_existence - ~/labdir d
 tree ~/labdir 2>/dev/null | tee -a $outfile
+blank_line
+echo -e "**--- File Contents" | tee -a $outfile
 cat ~/labdir/labfile* 2>/dev/null | tee -a $outfile
 blank_line
 echo -e "**--- Script File ~/filedate.sh" | tee -a $outfile
