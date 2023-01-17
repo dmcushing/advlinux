@@ -27,7 +27,7 @@ fi
 
 student_info(){
 
-echo -e "$1 $2 Submission"
+echo -e "$3 $1 $2 Submission"
 blank_line
 
 while IFS=: read -r c1 c2; do
@@ -60,7 +60,7 @@ return 0
 
 student_info_midterm(){
 
-echo -e "$1 $2 Submission"
+echo -e "$3 $1 $2 Submission"
 blank_line
 
 while IFS=: read -r c1 c2; do
@@ -111,7 +111,7 @@ content=$( base64 -w0 $outfile )
 attachment="$1_$2-$lname-$fname.txt"
 
 read -p "Mail your work to your instructor? (y to send mail or CTRL-C to exit) "
-echo "$( cat $outfile )" | mailx -s "$lname $fname: $1 $2 " -r mailrelay@cety.online $mailaddy,$inmailaddy
+echo "$( cat $outfile )" | mailx -s "$lname $fname: $3 $1 $2 " -r mailrelay@cety.online $mailaddy,$inmailaddy
 
 # mailx with attachment (for reference)
 # mailx -a file.txt -s "Subject" user@domain.com < /dev/null
@@ -125,7 +125,7 @@ content=`base64 -w0 $outfile`
 attachment="$1_$2-$lname-$fname.txt"
 
 read -p "Mail your work to your instructor? (y to send mail or CTRL-C to exit) "
-echo "$( cat $outfile )" | mailx -s "$lname $fname: $1 $2 " -r mailrelay@cety.online $mailaddy,$inmailaddy
+echo "$( cat $outfile )" | mailx -s "$lname $fname: $3 $1 $2 " -r mailrelay@cety.online $mailaddy,$inmailaddy
 
 exit 0
 }

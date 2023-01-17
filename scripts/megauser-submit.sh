@@ -12,7 +12,7 @@ clear
 is_super_user
 
 # Gather student information
-student_info MegaUser Script
+student_info MegaUser Script CET1034
 
 echo -e "**--- megauser dir" | tee -a $outfile
 tree ~/megalab | tee -a $outfile
@@ -23,4 +23,4 @@ echo -e "**--- ~/megalab/megauser.txt" | tee -a $outfile
 cat ~/megalab/megauser.txt | tee -a $outfile
 
 # Mail information to instructor and student
-mail_out MegaUser Script
+mail_out MegaUser Script CET1034
