@@ -23,39 +23,45 @@ else
 fi
 }
 
-# Gather Student Information and Create Information File
+# Gather Student Information from Information File
 
 student_info(){
 
 echo -e "$3 $1 $2 Submission"
 blank_line
 
-while IFS=: read -r c1 c2; do
-    [[ $c1 == Name ]] && name=$c2
-    [[ $c1 == FName ]] && fname=$c2
-    [[ $c1 == LName ]] && lname=$c2
-    [[ $c1 == Email ]] && mailaddy=$c2
-    [[ $c1 == Student ]] && snumber=$c2
-    [[ $c1 == Instructor ]] && inmailaddy=$c2
-done < ~/.info/.info
+if [ -f ~/.info/.info ]; then
 
-echo -e "      First name: $fname"
-echo -e "       Last name: $lname"
-echo -e "  Student number: $snumber"
-echo -e "   Email address: $mailaddy"
-blank_line
-echo -e "Instructor email: $inmailaddy"
-blank_line
-read -n 1 -r -s -p $'Press enter to continue or CTRL-C to exit\n'
+	# Read the information from ~/.info/.info
+	while IFS=: read -r c1 c2; do
+		[[ $c1 == Name ]] && name=$c2
+		[[ $c1 == FName ]] && fname=$c2
+		[[ $c1 == LName ]] && lname=$c2
+		[[ $c1 == Email ]] && mailaddy=$c2
+		[[ $c1 == Student ]] && snumber=$c2
+		[[ $c1 == Instructor ]] && inmailaddy=$c2
+	done < ~/.info/.info
 
-filename=$snumber-$1_$2_${fname:0:1}_$lname.txt
-mkdir ~/.output 2>/tmp/null
-outfile=~/.output/$filename
+	echo -e "      First name: $fname"
+	echo -e "       Last name: $lname"
+	echo -e "  Student number: $snumber"
+	echo -e "   Email address: $mailaddy"
+	blank_line
+	echo -e "Instructor email: $inmailaddy"
+	blank_line
+	read -n 1 -r -s -p $'Press enter to continue or CTRL-C to exit\n'
 
-echo $( cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
-echo -e "$1 $2 - ($snumber) $fname $lname" >> $outfile
+	filename=$snumber-$1_$2_${fname:0:1}_$lname.txt
+	mkdir ~/.output 2>/tmp/null
+	outfile=~/.output/$filename
 
-return 0
+	echo $( cat /etc/machine-id ) $( TZ=America/Toronto date ) > $outfile
+	echo -e "$1 $2 - ($snumber) $fname $lname" >> $outfile
+	return 0
+else
+	echo -e "!! ERROR !!  Please run sudo -E /scripts/mailtest.sh" | tee -a $outfile
+	exit 1
+fi
 }
 
 student_info_midterm(){
@@ -202,7 +208,7 @@ fi
 }
 
 # Check if file or directory exists
-# Parameters question, path, f, b (block device), h (symlink) or d
+# Parameters question, path, f (file), b (block device), h (symlink) or d (directory)
 
 check_existence(){
 if [ -$3 $2 ];
