@@ -59,7 +59,7 @@ if [ -f ~/.info/.info ]; then
 	echo -e "$1 $2 - ($snumber) $fname $lname" >> $outfile
 	return 0
 else
-	echo -e "!! ERROR !!  Please run sudo -E /scripts/mailtest.sh" | tee -a $outfile
+	echo -e "!! ERROR !!  Information file not found. \nPlease run sudo -E /scripts/mailtest.sh" | tee -a $outfile
 	exit 1
 fi
 }
