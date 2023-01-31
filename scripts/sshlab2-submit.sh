@@ -22,7 +22,8 @@ check_existence - /home/linuxuser/.ssh/id_rsa f
 check_existence - /home/linuxuser/.ssh/id_rsa.pub f
 blank_line
 echo -e "Can sshlab2 log in using the key?" | tee -a $outfile
-if [ ssh sshlab2@$srv2ipaddy "true" ]; then
+ssh sshlab2@$srv2ipaddy
+if [ $? -eq 0 ]; then
 	echo -e "ssh sslhlab2@$srv2ipaddy successful!" | tee -a $outfile
 else
 	echo -e "ssh sslhlab2@$srv2ipaddy NOT successful!" | tee -a $outfile
