@@ -25,6 +25,7 @@ echo -e "Can sshlab2 log in using the key?" | tee -a $outfile
 ssh sshlab2@$srv2ipaddy
 if [ $? -eq 0 ]; then
 	echo -e "ssh sslhlab2@$srv2ipaddy successful!" | tee -a $outfile
+	exit
 else
 	echo -e "ssh sslhlab2@$srv2ipaddy NOT successful!" | tee -a $outfile
 fi
