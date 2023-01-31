@@ -9,7 +9,7 @@ source /scripts/functions.sh
 clear
 
 # Verify script is running as root
-is_super_user
+# is_super_user
 
 # Gather student information
 student_info sshlab2 user CET1034
