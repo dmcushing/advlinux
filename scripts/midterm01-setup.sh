@@ -13,6 +13,10 @@ is_super_user
 
 echo "Cleaning up.."
 apt -y purge apache2 >/dev/null 2>&1
+rm -Rf /var/www/*
+cp /scripts/data/midterm01.html /var/www/html/index.html
+chown -R linuxuser:linuxuser /var/www/html
+rm ~/.ssh/id_rsa*
 groupadd midterm >/dev/null 2>&1
 mkdir ~/midterm >/dev/null 2>&1
 chown linuxuser:linuxuser ~/midterm
