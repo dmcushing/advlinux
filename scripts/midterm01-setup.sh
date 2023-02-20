@@ -20,6 +20,7 @@ chown -R linuxuser:linuxuser /var/www/html
 rm ~/.ssh/id_rsa*  >/dev/null 2>&1
 groupadd midterm >/dev/null 2>&1
 mkdir ~/midterm >/dev/null 2>&1
-chown linuxuser:linuxuser ~/midterm
-chmod 755 ~/midterm
+cp /scripts/data/midterm-makepage01.sh ~/midterm/makepage.sh
+chown -R linuxuser:linuxuser ~/midterm
+chmod -R 755 ~/midterm
 echo "Done."
