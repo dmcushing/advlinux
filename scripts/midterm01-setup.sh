@@ -13,6 +13,8 @@ is_super_user
 
 echo "Cleaning up.."
 apt -y purge apache2 >/dev/null 2>&1
+rm /etc/apache2/sites-enabled/*
+rm /etc/apache2/sites-available/*
 rm -Rf /var/www/*
 mkdir -p /var/www/html
 cp /scripts/data/midterm01.html /var/www/html/index.html
