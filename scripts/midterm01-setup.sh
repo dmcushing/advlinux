@@ -14,6 +14,7 @@ is_super_user
 echo "Cleaning up.."
 apt -y purge apache2 >/dev/null 2>&1
 rm -Rf /var/www/*
+mkdir -p /var/www/html
 cp /scripts/data/midterm01.html /var/www/html/index.html
 chown -R linuxuser:linuxuser /var/www/html
 rm ~/.ssh/id_rsa*
