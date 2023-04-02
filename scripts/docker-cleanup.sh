@@ -7,7 +7,7 @@ clear
 is_super_user
 
 echo -e "Starting.."
-docker kill $(docker ps -q) &2>/dev/null
-docker rm $(docker ps -a -q) &2>/dev/null
-docker rmi $(docker images -q) &2>/dev/null
+docker kill $(docker ps -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)
 echo -e "..Complete"
