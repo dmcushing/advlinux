@@ -6,6 +6,8 @@ clear
 # Verify script is running as root
 is_super_user
 
+echo -e "Starting.."
 docker kill $(docker ps -q) &2>/dev/null
 docker rm $(docker ps -a -q) &2>/dev/null
 docker rmi $(docker images -q) &2>/dev/null
+echo -e "..Complete"
