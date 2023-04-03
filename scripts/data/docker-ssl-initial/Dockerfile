@@ -11,15 +11,10 @@ COPY your-domain-httpd.conf /usr/local/apache2/conf/httpd.conf
 RUN mkdir -p /usr/local/apache2/conf/sites
 COPY default.conf /usr/local/apache2/conf/sites/default.conf
 COPY your-domain.class.cety.online.conf /usr/local/apache2/conf/sites/your-domain.class.cety.online.conf
-COPY your-domain-2.class.cety.online.conf /usr/local/apache2/conf/sites/your-domain-2.class.cety.online.conf
 
-# Create the your-domain folder and copy html files
+# Create the your-domain folder and copy website files
 RUN mkdir -p /usr/local/apache2/htdocs/your-domain
-COPY index-your-domain.html /usr/local/apache2/htdocs/your-domain/index.html
-
-# Create the your-domain-2 folder and copy html files
-RUN mkdir -p /usr/local/apache2/htdocs/your-domain-2
-COPY index-your-domain-2.html /usr/local/apache2/htdocs/your-domain-2/index.html
+COPY website /usr/local/apache2/htdocs/your-domain/
 
 # Allow connection to port 80
 EXPOSE 80
