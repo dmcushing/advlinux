@@ -6,7 +6,7 @@ COPY index.html /usr/local/apache2/htdocs/index.html
 
 # Add IncludeOptional conf/sites to httpd.conf
 # to load site configuration information from this directory
-RUN echo "IncludeOptional conf/sites/*.conf"
+RUN echo "IncludeOptional conf/sites/*.conf" >> /usr/local/apache2/conf/httpd.conf
 
 # Create the Apache sites folder and copy the site configs
 RUN mkdir -p /usr/local/apache2/conf/sites
