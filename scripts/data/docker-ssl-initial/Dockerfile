@@ -4,8 +4,9 @@ FROM httpd:2.4
 # Use our DEFAULT index.html for the DEFAULT web site
 COPY index.html /usr/local/apache2/htdocs/index.html
 
-# Copy our custom httpd.conf over the existing httpd.conf
-COPY your-domain-httpd.conf /usr/local/apache2/conf/httpd.conf
+# Add IncludeOptional conf/sites to httpd.conf
+# to load site configuration information from this directory
+RUN echo "IncludeOptional conf/sites/*.conf"
 
 # Create the Apache sites folder and copy the site configs
 RUN mkdir -p /usr/local/apache2/conf/sites
