@@ -11,7 +11,7 @@ RUN echo "IncludeOptional conf/sites/*.conf" >> /usr/local/apache2/conf/httpd.co
 # Create the Apache sites folder and copy the site configs
 RUN mkdir -p /usr/local/apache2/conf/sites
 COPY default.conf /usr/local/apache2/conf/sites/default.conf
-COPY your-domain.class.cety.online.conf /usr/local/apache2/conf/sites/your-domain-2.class.cety.online.conf
+COPY your-domain-2.class.cety.online.conf /usr/local/apache2/conf/sites/your-domain-2.class.cety.online.conf
 
 # Create the your-domain folder and copy website files
 RUN mkdir -p /usr/local/apache2/htdocs/your-domain-2
