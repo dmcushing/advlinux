@@ -1,9 +1,9 @@
 # Which image to build from?
 FROM dmcushing/httpd_base
 
-# Make directory /usr/local/apache2/your-domain-2
+# Make directory /usr/local/apache2/www/your-domain-2
 
-# Copy website to /usr/local/apache2/your-domain-2
+# Copy website to /usr/local/apache2/www/your-domain-2
 
 # Copy *.pem files to /usr/local/apache2/conf/sites/
 
